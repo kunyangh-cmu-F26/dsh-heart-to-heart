@@ -1,0 +1,25 @@
+{
+  "name": "dsh-heart-to-heart",
+  "version": "0.1.0",
+  "description": "知心聊天者 · Let users send a thought in several messages before their DSH companion replies.",
+  "type": "module",
+  "license": "MIT",
+  "engines": { "node": ">=24.9.0", "dsh": ">=0.2.2-rc.1 <0.3.0-0" },
+  "main": "./src/host.js",
+  "exports": {
+    ".": "./src/host.js",
+    "./client": "./lib/client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json"
+  },
+  "files": ["src", "lib", "scripts", "test", "cordis.patch.yml", "README.md", "LICENSE"],
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test",
+    "prepack": "npm run build && npm test"
+  },
+  "dsh": {
+    "bundle": { "patch": "./cordis.patch.yml" },
+    "client": { "platform": "web", "inject": ["@deepseek-ai/dsh-client-ui-renderer", "@deepseek-ai/dsh-api-session-controller", "@deepseek-ai/dsh-client-ui-conversation", "@deepseek-ai/dsh-client-locale", "@deepseek-ai/dsh-client-modules"] }
+  }
+}
